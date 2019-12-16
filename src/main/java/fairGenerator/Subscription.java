@@ -17,9 +17,9 @@ public class Subscription {
         },PREMIUM{
             public Subscription subscribe(){
                 Subscription subscription = new Subscription();
-                subscription.MINIMUM_DISTANCE_PER_KILOMETER = 20.0;
+                subscription.MINIMUM_DISTANCE_PER_KILOMETER = 15.0;
                 subscription.COST_PER_TIME = 2.0;
-                subscription.MINIMUM_FARE = 10.0;
+                subscription.MINIMUM_FARE = 20.0;
                 return  subscription;
             }
         };

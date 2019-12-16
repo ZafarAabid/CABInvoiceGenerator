@@ -2,27 +2,25 @@ package fairGenerator;
 
 import InvoiceSummary.InvoiceSummary;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 public class InvoiceService {
 
-    public static Double MINIMUM_DISTANCE_PER_KILOMETER = 10.0;
-    public static Double COST_PER_TIME = 1.0;
-    public static double MINIMUM_FARE = 5.0;
+    public static Double MINIMUM_DISTANCE_PER_KILOMETER = 00.0;
+    public static Double COST_PER_TIME = 0.0;
+    public static double MINIMUM_FARE = 0.0;
     double totalFair = 0.0;
-    public RideRepository rideRepository;
+    public RideRepository rideRepository = new RideRepository();
 
     public InvoiceService() {
-        rideRepository = new RideRepository();
     }
 
-    public Double calculateFare(Double distance, Double time, Subscription.Subscribe subscription) {
+    public InvoiceService(Subscription.Subscribe subscription) {
         Subscription subscriptionForFair = Subscription.subscribe(subscription);
         this.MINIMUM_DISTANCE_PER_KILOMETER = subscriptionForFair.MINIMUM_DISTANCE_PER_KILOMETER;
-        this.COST_PER_TIME=subscriptionForFair.COST_PER_TIME;
+        this.COST_PER_TIME = subscriptionForFair.COST_PER_TIME;
         this.MINIMUM_FARE = subscriptionForFair.MINIMUM_FARE;
+    }
+
+    public Double calculateFare(Double distance, Double time) {
         Double fair = distance * MINIMUM_DISTANCE_PER_KILOMETER + time * COST_PER_TIME;
         return Math.max(fair, MINIMUM_FARE);
     }
