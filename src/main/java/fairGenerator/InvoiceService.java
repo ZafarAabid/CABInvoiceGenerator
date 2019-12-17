@@ -2,9 +2,11 @@ package fairGenerator;
 
 import InvoiceSummary.InvoiceSummary;
 
+import java.util.List;
+
 public class InvoiceService {
 
-    public static Double MINIMUM_DISTANCE_PER_KILOMETER = 00.0;
+    public static Double MINIMUM_DISTANCE_PER_KILOMETER = 0.0;
     public static Double COST_PER_TIME = 0.0;
     public static double MINIMUM_FARE = 0.0;
     double totalFair = 0.0;
@@ -36,6 +38,7 @@ public class InvoiceService {
     public void addRide(String userId, Ride[] rides) {
         rideRepository.addRides(userId, rides);
     }
+
 
     public InvoiceSummary getInvoiceSummery(String userId) {
         return calculateFare(rideRepository.getRides(userId));

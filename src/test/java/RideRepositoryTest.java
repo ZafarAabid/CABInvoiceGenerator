@@ -14,7 +14,7 @@ public class RideRepositoryTest {
                 new Ride(0.1, 1)
         };
         rideRepository.addRides(userId, rides);
-        Ride[] summary = new Ride[0];
+        Ride[] summary = new Ride[10];
         summary = rideRepository.getRides(userId);
         Assert.assertEquals(rides[0], summary[0]);
     }

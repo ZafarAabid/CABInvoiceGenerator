@@ -1,9 +1,13 @@
 import InvoiceSummary.InvoiceSummary;
 import fairGenerator.InvoiceService;
+import fairGenerator.MultipleRides;
 import fairGenerator.Ride;
 import fairGenerator.Subscription;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CABInvoiceGeneratorTest {
 
@@ -87,5 +91,24 @@ public class CABInvoiceGeneratorTest {
         InvoiceSummary expectedinvoiceSummery = new InvoiceSummary(2, 30);
         Assert.assertEquals(expectedinvoiceSummery, summery);
     }
+
+    @Test
+    public void givenUserIDAndMultipleRides_SouldReturnInvoiceSummeryPremiumFair() {
+        InvoiceService invoiceService = new InvoiceService( Subscription.Subscribe.PREMIUM);
+        Ride[] rides1 = {new Ride(2.0, 5.0),
+                new Ride(0.1, 4.0)
+        };
+        Ride[] rides2 = {new Ride(2.0, 5.0),
+                new Ride(0.1, 4.0)
+        };
+        String userId = "a@b.com";
+        invoiceService.addRide(userId, rides1);
+        invoiceService.addRide(userId, rides2);
+
+        InvoiceSummary summery = invoiceService.getInvoiceSummery(userId);
+        InvoiceSummary expectedinvoiceSummery = new InvoiceSummary(4, 60);
+        Assert.assertEquals(expectedinvoiceSummery, summery);
+    }
+
 
 }

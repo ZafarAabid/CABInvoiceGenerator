@@ -10,11 +10,12 @@ public class RideRepository {
     }
 
     public void addRides(String userId, Ride[] rides) {
-        List<Ride> rideList = Arrays.asList(rides);
-        this.userRides.put(userId, rideList);
+        if (userRides.size() == 0) {
+            userRides.put(userId,new ArrayList<>(Arrays.asList(rides)));
+        } else for (Ride ride : rides) userRides.get(userId).add(ride);
     }
 
     public Ride[] getRides(String userId) {
-        return this.userRides.get(userId).toArray(new Ride[0]);
+        return this.userRides.get(userId).toArray(new Ride[userRides.get(userId).size()]);
     }
 }
